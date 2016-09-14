@@ -105,7 +105,11 @@ var view = {
     });
   },
 
-  render: function(grid) {
+  render: function(piece, grid) {
+    for(var i = 0; i < piece.length; i++) {
+      var id = piece[i];
+      $("#" + id).addClass("stone");
+    }
     for(var i = 0; i < grid.length; i++) {
       var id = grid[i];
       $("#" + id).addClass("stone");
@@ -113,7 +117,7 @@ var view = {
   },
 
   clear: function() {
-    $('#container').empty();
+    $('.tile').removeClass("stone");
   }
   
 
@@ -143,8 +147,8 @@ var controller = {
 
 
       //rerender
-      //view.clear();
-      view.render(model.grid);
+      view.clear();
+      view.render(model.currentPiece, model.grid);
     }, 100)
   }
 
