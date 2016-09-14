@@ -50,16 +50,25 @@ var model = {
 
   checkForBoundary: function() {
     this.currentPiece = this.currentPiece.sort();
-    if (this.currentPiece[this.currentPiece.length - 1] % 10 === 1) {
+    
+    //right boundary
+    
+    var endIndex = this.currentPiece.length - 1;
+    if (this.currentPiece[endIndex] % 10 === 1) {
+    
       this.currentPiece = this.currentPiece.map(function(el) {
         return el - 1;
+
       });
     }
+    // left boundary
     if (this.currentPiece[0] % 10 === 0) {
       this.currentPiece = this.currentPiece.map(function(el) {
         return el + 1;
       });
     }  
+
+
 
   },
 
@@ -202,12 +211,14 @@ var controller = {
       
       var button = model.keyPress;
       model.movePiece(button);
+      
       model.checkForBoundary();
+      setInterval(model.checkForBoundary, 1);
       model.clearLines();
       //rerender
       view.clear();
       view.render(model.currentPiece, model.grid);
-    }, 200)
+    }, 100)
   }
 
 
