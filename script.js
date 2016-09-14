@@ -21,37 +21,36 @@ var model = {
     this.currentPiece = [];
     this.nextPiece = [];
     this.grid = [];
-    this.movedPiece = false;
+    this.keyPress = undefined;
   }, 
 
   //will handle keyPress of UPLEFTDOWNRIGHT+SPACE
   movePiece: function(keyPress) {
     if (keyPress === 40) {//down
       this.fallPiece();
-      this.movedPiece = true;
     }
     else if (keyPress === 37) {
       this.currentPiece = this.currentPiece.map( function(el) {
         return el - 1;
-        this.movedPiece = true;
       });
+      model.keyPress = undefined;
     }
     else if (keyPress === 39) {
       this.currentPiece = this.currentPiece.map( function(el) {
         return el + 1;
-        this.movedPiece = true;
       });
+      model.keyPress = undefined;
     } else {
-      this.movedPiece = false;
-    }
 
+    }
+    this.movedPiece = keyPress;
   },
 
   checkForBottom:function() {
     var currentPiece = this.currentPiece;
     var grid = this.grid;
     for (var i = 0; i < grid.length; i++) {
-      for (var j = 0; j < currentPiece; j++) {
+      for (var j = 0; j < currentPiece.length; j++) {
         if(currentPiece[j] === grid[i]) {
           this.currentPiece = this.currentPiece.map(function(el) {
             return el - 10;
@@ -117,10 +116,9 @@ var view = {
   },
 
   keyListener: function() {
-    thatView = this;
+    //thatView = this;
     $(document).on("keydown", function (e) {
-      thatView.keyPress = e.which;
-      console.log(thatView.keyPress);
+      model.keyPress = e.which;
     });
   },
 
@@ -160,18 +158,12 @@ var controller = {
   gameLoop: function() {
     model.generatePiece();
 
-    var button = undefined;
     setInterval(function() {
       model.fallPiece();
       //logic, validations
       
-      button = view.keyPress;
-      if (model.movedPiece) {
-        model.movePiece(button);
-      }
-      button = undefined;
-
-
+      var button = model.keyPress;
+      model.movePiece(button)
       //rerender
       view.clear();
       view.render(model.currentPiece, model.grid);
