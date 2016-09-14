@@ -50,7 +50,6 @@ var model = {
       if(currentPiece[i] > 200) {
         this.currentPiece = this.currentPiece.map(function(el) {
           return el - 10;
-          
         });
         return true
       }
@@ -74,7 +73,7 @@ var model = {
 
   //randomly spawns piece
   generatePiece: function() {
-    var pieceArr = pieces.sample;
+    var pieceArr = pieces.sample();
     this.currentPiece = pieceArr;
   },
 
@@ -145,8 +144,8 @@ var controller = {
 
       //rerender
       //view.clear();
-      view.render();
-    }, 2000)
+      view.render(model.grid);
+    }, 100)
   }
 
 
