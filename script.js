@@ -1,4 +1,21 @@
+//monkey patch 
+// kek <-- this one
+// kek
+// kek
+// kek
+Array.prototype.sample = function(){
+  return this[Math.floor(Math.random()*this.length)];
+};
 
+var pieces = [
+              [4,5,6,14], 
+              [6,14,15,16],
+              [8,14,15,16], 
+              [4,5,6,7],
+              [4,5,15,16],
+              [5,6,14,15],
+              [5,14,15,16]
+             ];
 
 var model = {
   init: function() {
@@ -6,8 +23,8 @@ var model = {
     this.row = 20;
     this.columns = 10;
     this.totalTiles = this.row * this.columns;
-    this.currentPiece;
-    this.nextPieces = [];
+    this.currentPiece = [];
+    this.nextPiece = [];
     this.grid = [];
 
   }, 
@@ -17,10 +34,33 @@ var model = {
 
   },
 
-  //randomly spawns piece
-  generatePiece: function() {
+  checkForBottom:function() {
 
   },
+
+  checkForBotGrid: function() {
+
+  },
+
+  //handles the natural time movement of piece(glide down)
+  fallPiece: function(){
+    this.currentPiece = this.currentPiece.map(function(el){
+      return el + 10;
+    });
+  },
+
+  //randomly spawns piece
+  generatePiece: function() {
+    var pieceArr = pieces.sample;
+    this.currentPiece = pieceArr;
+    thatModel = this;
+    pieceArr.forEach(function (el){
+      thatModel.grid.push = el;
+    });
+
+  },
+
+
 
   clearLines: function() {
 
