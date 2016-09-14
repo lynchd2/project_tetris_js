@@ -138,6 +138,8 @@ var model = {
   },
 };
 
+var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
+
 var view = {
   init: function() {
     this.keyListener();
@@ -161,16 +163,16 @@ var view = {
   render: function(piece, grid) {
     for(var i = 0; i < piece.length; i++) {
       var id = piece[i];
-      $("#" + id).addClass("stone");
+      $("#" + id).addClass("stone").css("background-color",colors.sample());
     }
     for(var i = 0; i < grid.length; i++) {
       var id = grid[i];
-      $("#" + id).addClass("stone");
+      $("#" + id).addClass("stone").css("background-color",colors.sample());
     }
   },
 
   clear: function() {
-    $('.tile').removeClass("stone");
+    $('.tile').removeClass("stone").css("background-color", "");
   }
   
 
