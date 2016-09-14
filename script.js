@@ -1,8 +1,3 @@
-//monkey patch 
-// kek <-- this one
-// kek
-// kek
-// kek
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
 };
@@ -35,11 +30,28 @@ var model = {
   },
 
   checkForBottom:function() {
-
+    var currentPiece = this.currentPiece;
+    var grid = this.grid;
+    for (var i = 0; i < grid.length; i++) {
+      for (var j = 0; j < currentPiece; j++) {
+        if(currentPiece[j] === grid[i]) {
+          this.currentPiece = this.currentPiece.map(function(el) {
+            el - 10;
+          });
+        }
+      }
+    }
   },
 
   checkForBotGrid: function() {
-
+    var currentPiece = this.currentPiece
+    for(var i = 0; i < currentPiece.length; i++) {
+      if(currentPiece[i] > 200) {
+        this.currentPiece = this.currentPiece.map(function(el) {
+          el - 10;
+        });
+      }
+    }
   },
 
   //handles the natural time movement of piece(glide down)
@@ -47,6 +59,11 @@ var model = {
     this.currentPiece = this.currentPiece.map(function(el){
       return el + 10;
     });
+    this.checkForBotGrid();
+    this.checkForBottom();
+    for(var i = 0; i < this.currentPiece.length; i ++) {
+      this.grid.push(this.currentPiece[i]);
+    }
   },
 
   //randomly spawns piece
