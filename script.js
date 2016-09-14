@@ -36,20 +36,23 @@ var model = {
       for (var j = 0; j < currentPiece; j++) {
         if(currentPiece[j] === grid[i]) {
           this.currentPiece = this.currentPiece.map(function(el) {
-            el - 10;
+            return el - 10;
           });
+          return true;
         }
       }
     }
   },
 
   checkForBotGrid: function() {
-    var currentPiece = this.currentPiece
+    var currentPiece = this.currentPiece;
     for(var i = 0; i < currentPiece.length; i++) {
       if(currentPiece[i] > 200) {
         this.currentPiece = this.currentPiece.map(function(el) {
-          el - 10;
+          return el - 10;
+          
         });
+        return true
       }
     }
   },
@@ -58,23 +61,21 @@ var model = {
   fallPiece: function(){
     this.currentPiece = this.currentPiece.map(function(el){
       return el + 10;
+
     });
-    this.checkForBotGrid();
-    this.checkForBottom();
-    for(var i = 0; i < this.currentPiece.length; i ++) {
-      this.grid.push(this.currentPiece[i]);
-    }
+    if(this.checkForBotGrid() || this.checkForBottom()) {
+      for(var i = 0; i < this.currentPiece.length; i ++) {
+        this.grid.push(this.currentPiece[i]);
+      }
+      this.currentPiece = [];
+      this.generatePiece();
+    };
   },
 
   //randomly spawns piece
   generatePiece: function() {
     var pieceArr = pieces.sample;
     this.currentPiece = pieceArr;
-    thatModel = this;
-    pieceArr.forEach(function (el){
-      thatModel.grid.push = el;
-    });
-
   },
 
 
@@ -105,8 +106,11 @@ var view = {
     });
   },
 
-  render: function() {
-    
+  render: function(grid) {
+    for(var i = 0; i < grid.length; i++) {
+      var id = grid[i];
+      $("#" + id).addClass("stone");
+    }
   },
 
   clear: function() {
@@ -132,10 +136,11 @@ var controller = {
 
 
   gameLoop: function() {
+    model.generatePiece();
     setInterval(function() {
-      
+      model.fallPiece();
       //logic, validations
-
+      
 
 
       //rerender
