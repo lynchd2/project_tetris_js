@@ -71,8 +71,6 @@ var controller = {
       view.render();
     }, 300)
   }
-
-
 }
 
 
