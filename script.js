@@ -23,6 +23,7 @@ var model = {
     this.nextPiece = [];
     this.grid = [];
     this.keyPress = undefined;
+    this.lastElement = undefined;
   }, 
 
   //will handle keyPress of UPLEFTDOWNRIGHT+SPACE
@@ -45,6 +46,10 @@ var model = {
 
     }
     this.movedPiece = keyPress;
+  },
+
+  checkForBoundary: function() {
+
   },
 
   checkForBottom:function() {
@@ -99,19 +104,18 @@ var model = {
 
   clearLines: function() {
     this.grid = this.grid.sort();
-
     var counter = 1;
     var id = 0;
 
-
-
     for (var i = 1; i < this.grid.length; i++) {
+      //if there are ten matching blocks in one row
       if (counter === 9) {
-        console.log('e');
         this.grid.splice( i - 9, 10);
+        for(var j = 0; j < i - 9; j ++) {
+          this.grid[j] += 10;
+        };
       }
       // compares each element to the element next to each other
-      console.log(counter);
       if ((this.grid[id] + 1) === this.grid[i]) {
         counter++;
       } else {
@@ -119,10 +123,7 @@ var model = {
       }
       id++;
     }
-
-
   },
-
 };
 
 var view = {
@@ -191,7 +192,7 @@ var controller = {
       //rerender
       view.clear();
       view.render(model.currentPiece, model.grid);
-    }, 100)
+    }, 1000)
   }
 
 
