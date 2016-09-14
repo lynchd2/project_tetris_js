@@ -49,6 +49,17 @@ var model = {
   },
 
   checkForBoundary: function() {
+    this.currentPiece = this.currentPiece.sort();
+    if (this.currentPiece[this.currentPiece.length - 1] % 10 === 1) {
+      this.currentPiece = this.currentPiece.map(function(el) {
+        return el - 1;
+      });
+    }
+    if (this.currentPiece[0] % 10 === 0) {
+      this.currentPiece = this.currentPiece.map(function(el) {
+        return el + 1;
+      });
+    }  
 
   },
 
@@ -78,6 +89,7 @@ var model = {
       }
     }
   },
+
 
   //handles the natural time movement of piece(glide down)
   fallPiece: function(){
@@ -188,11 +200,12 @@ var controller = {
       
       var button = model.keyPress;
       model.movePiece(button);
+      model.checkForBoundary();
       model.clearLines();
       //rerender
       view.clear();
       view.render(model.currentPiece, model.grid);
-    }, 1000)
+    }, 200)
   }
 
 
