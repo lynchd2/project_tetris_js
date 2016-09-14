@@ -5,7 +5,7 @@ Array.prototype.sample = function(){
 var pieces = [
               [4,5,6,14], 
               [6,14,15,16],
-              [8,14,15,16], 
+              [4,14,15,16], 
               [4,5,6,7],
               [4,5,15,16],
               [5,6,14,15],
@@ -21,11 +21,29 @@ var model = {
     this.currentPiece = [];
     this.nextPiece = [];
     this.grid = [];
-
+    this.movedPiece = false;
   }, 
 
   //will handle keyPress of UPLEFTDOWNRIGHT+SPACE
   movePiece: function(keyPress) {
+    if (keyPress === 40) {//down
+      this.fallPiece();
+      this.movedPiece = true;
+    }
+    else if (keyPress === 37) {
+      this.currentPiece = this.currentPiece.map( function(el) {
+        return el - 1;
+        this.movedPiece = true;
+      });
+    }
+    else if (keyPress === 39) {
+      this.currentPiece = this.currentPiece.map( function(el) {
+        return el + 1;
+        this.movedPiece = true;
+      });
+    } else {
+      this.movedPiece = false;
+    }
 
   },
 
@@ -87,7 +105,7 @@ var model = {
 
 var view = {
   init: function() {
-    
+    this.keyListener();
   },
 
   placeBoard: function(totalTiles) {
@@ -102,6 +120,7 @@ var view = {
     thatView = this;
     $(document).on("keydown", function (e) {
       thatView.keyPress = e.which;
+      console.log(thatView.keyPress);
     });
   },
 
@@ -140,16 +159,23 @@ var controller = {
 
   gameLoop: function() {
     model.generatePiece();
+
+    var button = undefined;
     setInterval(function() {
       model.fallPiece();
       //logic, validations
       
+      button = view.keyPress;
+      if (model.movedPiece) {
+        model.movePiece(button);
+      }
+      button = undefined;
 
 
       //rerender
       view.clear();
       view.render(model.currentPiece, model.grid);
-    }, 100)
+    }, 200)
   }
 
 
