@@ -53,12 +53,22 @@ var model = {
       this.currentPiece = this.currentPiece.map( function(el) {
         return el - 1;
       });
+      if(model.checkForLeftRight()) {
+        this.currentPiece = this.currentPiece.map( function(el) {
+          return el + 1;
+        });
+      }
       model.keyPress = undefined;
     }
     else if (keyPress === 39) {
       this.currentPiece = this.currentPiece.map( function(el) {
         return el + 1;
       });
+      if(model.checkForLeftRight()) {
+        this.currentPiece = this.currentPiece.map( function(el) {
+          return el - 1;
+        });
+      }
       model.keyPress = undefined;
     } else if (keyPress === 38) {
       model.rotate();
@@ -91,35 +101,17 @@ var model = {
   },
 
 
-  checkForLeft: function() {
-
+  checkForLeftRight: function() {
     var currentPiece = this.currentPiece;
       var grid = this.grid;
       for (var i = 0; i < grid.length; i++) {
         for (var j = 0; j < currentPiece.length; j++) {
-          if(currentPiece[j] + 1 === grid[i]) {
-            this.currentPiece = this.currentPiece.map(function(el) {
-              return el - 1;
-            });
+          if(currentPiece[j] === grid[i]) {
             return true;
           }
         }
       }
-    },
-
-    checkForRight: function() {
-    var currentPiece = this.currentPiece;
-      var grid = this.grid;
-      for (var i = 0; i < grid.length; i++) {
-        for (var j = 0; j < currentPiece.length; j++) {
-          if(currentPiece[j] + 1 === grid[i]) {
-            this.currentPiece = this.currentPiece.map(function(el) {
-              return el + 1;
-            });
-            return true;
-          }
-        }
-      }
+      return false;
     },
 
   checkForBottom:function() {
