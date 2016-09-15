@@ -14,45 +14,15 @@ function hashSample( obj ) {
 
 var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
 var pieces = {
-              // "rightL": [4, 5, 14, 6], 
-              "rightL": [14, 6, 15, 16],
-              "leftL": [4, 14 ,15, 16], 
-              "column": [4, 5, 6, 7],
-              "leftS": [4, 5, 15, 16],
-              "rightS": [14, 5, 15, 16],
-              "arrow": [14, 5, 15, 6],
-              "square": [4, 14, 5, 15]
+                //             // "rightL": [4, 5, 14, 6], 
+  //             "rightL": [14, 6, 15, 16],
+  //             "leftL": [4, 14 ,15, 16], 
+  //             "column": [4, 5, 6, 7],
+  //             "leftS": [4, 5, 15, 16],
+              "arrow": [14, 5, 15, 16],
+  //             "rightS": [14, 5, 15, 6],
+  //             "square": [4, 14, 5, 15]
              };
-
-//takes in a piece and rotates it
-var rotate = function(pieceName, piece) {
-  //first identify which one it is
-  switch(pieceName) {
-    case "rightL":
-      rotateRightL(piece,this.rotateCounter);
-      break;
-    case "leftL":
-      rotateLeftL(piece, this.rotateCounter);
-      break;
-    default:
-    case "column":
-      rotateColumn(piece, this.rotateCounter);
-      break;
-    case "leftS":
-      rotateLeftS(piece, this.rotateCounter);
-      break;
-    case "rightS":
-      rotateRightS(piece, this.rotateCounter);
-      break;
-    case "arrow":
-      rotateArrow(piece, this.rotateCounter);
-      break;
-    default:
-      break
-  }
-};
-
-
 
 var model = {
   init: function() {
@@ -67,7 +37,6 @@ var model = {
     this.currentPiece = [];
     //optional
     this.nextPiece = [];
-    
     this.grid = [];
     this.keyPress = undefined;
   }, 
@@ -224,17 +193,7 @@ var model = {
   },
 
   rotate: function() {
-
-    // arr = [4, 5, 14, 6]
-    // 6 - 9 * 0
-    // 14 - 9 * 1
-    // 5 - 9 * 2
-    // 4 - 9 * 3
-    var counter = model.currentPiece.length - 1;
-    model.currentPiece = model.currentPiece.map(function(el){
-      return el - (9 * counter);
-      counter -= 1;
-    });
+    rotationLogic.rotate(this.currentPieceName, this.currentPiece);
   }
 };
 
