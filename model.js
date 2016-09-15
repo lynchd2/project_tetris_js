@@ -2,31 +2,54 @@
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
 };
+
+//returns key and value
+function hashSample( obj ) {
+    var keys = Object.keys(obj);
+    var len = keys.length;
+    var rnd = Math.floor(Math.random()*len);
+    var key = keys[rnd];
+    return [key, obj[key]];
+};
+
 var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
 var pieces = {
-              "leftS": [4, 5, 14, 6], 
+              // "rightL": [4, 5, 14, 6], 
               "rightL": [14, 6, 15, 16],
               "leftL": [4, 14 ,15, 16], 
-              "square": [4, 5, 6, 7],
-              "": [4, 5, 15, 16],
-              "": [14, 5, 15, 6],
-              "": [14, 5, 15, 16],
-              "": [4, 14, 5, 15]
+              "column": [4, 5, 6, 7],
+              "leftS": [4, 5, 15, 16],
+              "rightS": [14, 5, 15, 16],
+              "arrow": [14, 5, 15, 6],
+              "square": [4, 14, 5, 15]
              };
 
 //takes in a piece and rotates it
-var rotate = function(block) {
+var rotate = function(pieceName, piece) {
   //first identify which one it is
-  if ()
-  {
-    rotateColumn(block);
+  switch(pieceName) {
+    case "rightL":
+      rotateRightL(piece,this.rotateCounter);
+      break;
+    case "leftL":
+      rotateLeftL(piece, this.rotateCounter);
+      break;
+    default:
+    case "column":
+      rotateColumn(piece, this.rotateCounter);
+      break;
+    case "leftS":
+      rotateLeftS(piece, this.rotateCounter);
+      break;
+    case "rightS":
+      rotateRightS(piece, this.rotateCounter);
+      break;
+    case "arrow":
+      rotateArrow(piece, this.rotateCounter);
+      break;
+    default:
+      break
   }
-
-  //square
-};
-
-var rotateColumn = function(square, how) {
-  switch (how)
 };
 
 
@@ -37,8 +60,14 @@ var model = {
     this.row = 20;
     this.columns = 10;
     this.totalTiles = this.row * this.columns;
+
+    // two of these is to account for rotation..
+    this.rotateCounter = 0;
+    this.currentPieceName = "";
     this.currentPiece = [];
+    //optional
     this.nextPiece = [];
+    
     this.grid = [];
     this.keyPress = undefined;
   }, 
@@ -71,7 +100,7 @@ var model = {
       }
       model.keyPress = undefined;
     } else if (keyPress === 38) {
-      model.rotate();
+      model.rotate(); // ROTATEEDIT
       model.keyPress = undefined;
     }
 
@@ -156,10 +185,16 @@ var model = {
     };
   },
 
+
+  
   //randomly spawns piece
   generatePiece: function() {
-    var pieceArr = pieces.sample();
-    this.currentPiece = pieceArr;
+    var pieceArr = hashSample(pieces);
+    this.rotateCounter = 0;
+    //key (name)
+    this.currentPieceName = pieceArr[0];
+    // value (array)
+    this.currentPiece = pieceArr[1];
   },
 
 
