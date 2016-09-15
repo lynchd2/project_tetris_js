@@ -74,20 +74,107 @@ var rotationLogic = {
 
     switch(counter) {
       case 0:
-        model.currentPiece[0] -= 8;
-        model.currentPiece[3] -= 10;
+        model.currentPiece[0] -= 10;
+        model.currentPiece[3] -= 12;
         break;
       case 1:
-        model.currentPiece[0] += 8;
-        model.currentPiece[3] += 10;
+        model.currentPiece[0] += 10;
+        model.currentPiece[3] += 12;
         break;
       case 2:
-        model.currentPiece[0] -= 8;
-        model.currentPiece[3] -= 10;
+        model.currentPiece[0] -= 10;
+        model.currentPiece[3] -= 12;
         break;
       case 3:
-        model.currentPiece[0] += 8;
-        model.currentPiece[3] += 10;
+        model.currentPiece[0] += 10;
+        model.currentPiece[3] += 12;
+        break;
+      default:
+        break;
+    }
+  },
+
+  rotateColumn: function(piece, counter) {
+    // model.currentPiece[2] is pivot
+
+    switch(counter) {
+      case 0:
+        model.currentPiece[0] -= 18;
+        model.currentPiece[1] -= 9;
+        model.currentPiece[3] += 9;
+        break;
+      case 1:
+        model.currentPiece[0] += 18;
+        model.currentPiece[1] += 9;
+        model.currentPiece[3] -= 9;
+        break;
+      case 2:
+        model.currentPiece[0] -= 18;
+        model.currentPiece[1] -= 9;
+        model.currentPiece[3] += 9;
+        break;
+      case 3:
+        model.currentPiece[0] += 18;
+        model.currentPiece[1] += 9;
+        model.currentPiece[3] -= 9;
+        break;
+      default:
+        break;
+    }
+  },
+
+  rotateLeftL: function(piece, counter) {
+    // model.currentPiece[2] is pivot
+
+    switch(counter) {
+      case 0:
+        model.currentPiece[0] -= 9;
+        model.currentPiece[1] -= 20;
+        model.currentPiece[3] += 9;
+        break;
+      case 1:
+        model.currentPiece[0] += 11;
+        model.currentPiece[1] += 2;
+        model.currentPiece[3] -= 11;
+        break;
+      case 2:
+        model.currentPiece[0] +=  9;
+        model.currentPiece[1] += 20;
+        model.currentPiece[3] -= 9;
+        break;
+      case 3:
+        model.currentPiece[0] -= 11;
+        model.currentPiece[1] -= 2;
+        model.currentPiece[3] += 11;
+        break;
+      default:
+        break;
+    }
+  },
+
+  rotateRightL: function(piece, counter) {
+    // model.currentPiece[1] is pivot
+
+    switch(counter) {
+      case 0:
+        model.currentPiece[0] -= 9;
+        model.currentPiece[2] += 9;
+        model.currentPiece[3] -= 2;
+        break;
+      case 1:
+        model.currentPiece[0] += 11;
+        model.currentPiece[2] -= 11;
+        model.currentPiece[3] -= 20;
+        break;
+      case 2:
+        model.currentPiece[0] += 9;
+        model.currentPiece[2] -= 9;
+        model.currentPiece[3] += 2;
+        break;
+      case 3:
+        model.currentPiece[0] -= 11;
+        model.currentPiece[2] += 11;
+        model.currentPiece[3] += 20;
         break;
       default:
         break;

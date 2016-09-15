@@ -14,14 +14,14 @@ function hashSample( obj ) {
 
 var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
 var pieces = {
-                //             // "rightL": [4, 5, 14, 6], 
-  //             "rightL": [14, 6, 15, 16],
-  //             "leftL": [4, 14 ,15, 16], 
-  //             "column": [4, 5, 6, 7],
+              
+              "rightL": [4, 5, 6, 16],
+              // "leftL": [4, 14 ,5, 6], 
+              // "column": [4, 5, 6, 7],
               // "leftS": [4, 5, 15, 16],
               // "arrow": [14, 5, 15, 16],
-              "rightS": [14, 5, 15, 6],
-  //             "square": [4, 14, 5, 15]
+              // "rightS": [14, 5, 15, 6],
+              // "square": [4, 14, 5, 15]
              };
 
 var model = {
