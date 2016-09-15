@@ -45,16 +45,49 @@ var rotationLogic = {
   },
 
   rotateLeftS: function(piece, counter) {
+    // model.currentPiece[1] is pivot and [2] doesn't move
+
     switch(counter) {
-      //rotation
       case 0:
-        
+        model.currentPiece[0] -= 8;
+        model.currentPiece[3] -= 10;
         break;
       case 1:
+        model.currentPiece[0] += 8;
+        model.currentPiece[3] += 10;
         break;
       case 2:
+        model.currentPiece[0] -= 8;
+        model.currentPiece[3] -= 10;
         break;
       case 3:
+        model.currentPiece[0] += 8;
+        model.currentPiece[3] += 10;
+        break;
+      default:
+        break;
+    }
+  },
+
+  rotateRightS: function(piece, counter) {
+    // model.currentPiece[1] is pivot and [2] doesn't move
+
+    switch(counter) {
+      case 0:
+        model.currentPiece[0] -= 8;
+        model.currentPiece[3] -= 10;
+        break;
+      case 1:
+        model.currentPiece[0] += 8;
+        model.currentPiece[3] += 10;
+        break;
+      case 2:
+        model.currentPiece[0] -= 8;
+        model.currentPiece[3] -= 10;
+        break;
+      case 3:
+        model.currentPiece[0] += 8;
+        model.currentPiece[3] += 10;
         break;
       default:
         break;
@@ -64,9 +97,7 @@ var rotationLogic = {
 // "arrow": [14, 5, 15, 6],
   rotateArrow: function(piece, counter) {
     console.log(counter);
-
     // model.currentPiece[2] is pivot
-
     switch(counter) {
       case 0:
         model.currentPiece[0] -= 9;
@@ -79,19 +110,17 @@ var rotationLogic = {
         model.currentPiece[3] -= 11;
         break;
       case 2:
-        // model.currentPiece[0] -= 9;
-        // model.currentPiece[1] += 11;
-        // model.currentPiece[3] += 9;
+        model.currentPiece[0] += 9;
+        model.currentPiece[1] -= 11;
+        model.currentPiece[3] -= 9;
         break;
       case 3:
-        // model.currentPiece[0] -= 9;
-        // model.currentPiece[1] += 11;
-        // model.currentPiece[3] += 9;
+        model.currentPiece[0] -= 11;
+        model.currentPiece[1] -= 9;
+        model.currentPiece[3] += 11;
         break;
       default:
         break;
-
-
     }
   },
 
