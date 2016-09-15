@@ -10,7 +10,8 @@ var pieces = [
               [4, 5, 6, 7],
               [4, 5, 15, 16],
               [14, 5, 15, 6],
-              [14, 5, 15, 16]
+              [14, 5, 15, 16],
+              [4, 14, 5, 15]
              ];
 
 var model = {
@@ -125,7 +126,7 @@ var model = {
 
   clearLines: function() {
     this.grid = this.grid.sort();
-    var counter = 1;
+    var counter = 0;
     var id = 0;
 
     for (var i = 1; i < this.grid.length; i++) {
