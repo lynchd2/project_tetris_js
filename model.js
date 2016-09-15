@@ -100,7 +100,6 @@ var model = {
     }
   },
 
-
   //handles the natural time movement of piece(glide down)
   fallPiece: function(){
     this.currentPiece = this.currentPiece.map(function(el){
@@ -132,7 +131,7 @@ var model = {
     for (var i = 1; i < this.grid.length; i++) {
       //if there are ten matching blocks in one row
       if (counter === 9) {
-        this.grid.splice( i - 9, 10);
+        this.grid.splice( i- 9, 10);
         for(var j = 0; j < i - 9; j ++) {
           this.grid[j] += 10;
           this.score++;

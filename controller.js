@@ -13,7 +13,17 @@ var controller = {
 
   getScore: function() {
     var score = model.score;
-    view.renderScore();
+    view.renderScore(score);
+  },
+
+  reRender: function () {
+    view.clear();
+      view.render(model.currentPiece, model.grid);
+  },
+
+  playerInput: function(){
+    var button = model.keyPress;
+    model.movePiece(button);
   },
 
 
@@ -21,20 +31,18 @@ var controller = {
   gameLoop: function() {
     model.generatePiece();
 
+    thatController = this;
     setInterval(function() {
       model.fallPiece();
+
       //logic, validations
-      
-      var button = model.keyPress;
-      model.movePiece(button);
+      thatController.playerInput();
       
       model.checkForBoundary();
       model.clearLines();
       //rerender
-      view.clear();
-      view.render(model.currentPiece, model.grid);
-      var score = model.score;
-      view.renderScore(score);
+      thatController.reRender();
+      thatController.getScore();
 
     }, 200)
   }
