@@ -3,16 +3,33 @@ Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
 };
 var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
-var pieces = [
-              [4, 5, 14, 6], 
-              [14, 6, 15, 16],
-              [4, 14 ,15, 16], 
-              [4, 5, 6, 7],
-              [4, 5, 15, 16],
-              [14, 5, 15, 6],
-              [14, 5, 15, 16],
-              [4, 14, 5, 15]
-             ];
+var pieces = {
+              "leftS": [4, 5, 14, 6], 
+              "rightL": [14, 6, 15, 16],
+              "leftL": [4, 14 ,15, 16], 
+              "square": [4, 5, 6, 7],
+              "": [4, 5, 15, 16],
+              "": [14, 5, 15, 6],
+              "": [14, 5, 15, 16],
+              "": [4, 14, 5, 15]
+             };
+
+//takes in a piece and rotates it
+var rotate = function(block) {
+  //first identify which one it is
+  if ()
+  {
+    rotateColumn(block);
+  }
+
+  //square
+};
+
+var rotateColumn = function(square, how) {
+  switch (how)
+};
+
+
 
 var model = {
   init: function() {
