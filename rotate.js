@@ -37,8 +37,11 @@ var rotationLogic = {
       default:
         break
     };
+    model.rotateCounter++;
 
-    model.rotateCounter = model.rotateCounter % 3;
+    if (model.rotateCounter > 3) {
+      model.rotateCounter -= 3;
+    }
   },
 
   rotateLeftS: function(piece, counter) {
@@ -60,20 +63,30 @@ var rotationLogic = {
 
 // "arrow": [14, 5, 15, 6],
   rotateArrow: function(piece, counter) {
+    console.log(counter);
+
+    // model.currentPiece[2] is pivot
+
     switch(counter) {
       case 0:
         model.currentPiece[0] -= 9;
         model.currentPiece[1] += 11;
-        // model.currentPiece[2] is pivot
         model.currentPiece[3] += 9;
-        //rotation
-        //model.currentPiece = mutilatethat
         break;
       case 1:
+        model.currentPiece[0] += 11;
+        model.currentPiece[1] += 9;
+        model.currentPiece[3] -= 11;
         break;
       case 2:
+        // model.currentPiece[0] -= 9;
+        // model.currentPiece[1] += 11;
+        // model.currentPiece[3] += 9;
         break;
       case 3:
+        // model.currentPiece[0] -= 9;
+        // model.currentPiece[1] += 11;
+        // model.currentPiece[3] += 9;
         break;
       default:
         break;
