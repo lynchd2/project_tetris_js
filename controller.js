@@ -21,6 +21,7 @@ var controller = {
       view.render(model.currentPiece, model.grid);
   },
 
+//Take the following method out; put into model
   playerInput: function(){
     var button = model.keyPress;
     model.movePiece(button);
@@ -30,21 +31,25 @@ var controller = {
 
   gameLoop: function() {
     model.generatePiece();
-
+    var counter = 0;
     thatController = this;
     setInterval(function() {
-      model.fallPiece();
-
+      if(counter % 1 === 0) {
+        thatController.playerInput();
+      }
+      if(counter % 10 === 0) {
+        model.fallPiece();
+      } 
       //logic, validations
-      thatController.playerInput();
+      
       
       model.checkForBoundary();
       model.clearLines();
       //rerender
       thatController.reRender();
       thatController.getScore();
-
-    }, 200)
+      counter ++;
+    }, 20)
   }
 
 

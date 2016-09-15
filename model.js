@@ -30,6 +30,7 @@ var model = {
   movePiece: function(keyPress) {
     if (keyPress === 40) {//down
       this.fallPiece();
+      model.keyPress = undefined;
     }
     else if (keyPress === 37) {
       this.currentPiece = this.currentPiece.map( function(el) {
@@ -56,7 +57,7 @@ var model = {
     
     var endIndex = this.currentPiece.length - 1;
     
-    if (Math.round(this.currentPiece[endIndex]) % 10 === 1) {
+    if (this.currentPiece[endIndex] % 10 === 1) {
     
       this.currentPiece = this.currentPiece.map(function(el) {
         return el - 1;
@@ -70,9 +71,39 @@ var model = {
       });
     }  
 
-
-
   },
+
+
+  checkForLeft: function() {
+
+    var currentPiece = this.currentPiece;
+      var grid = this.grid;
+      for (var i = 0; i < grid.length; i++) {
+        for (var j = 0; j < currentPiece.length; j++) {
+          if(currentPiece[j] + 1 === grid[i]) {
+            this.currentPiece = this.currentPiece.map(function(el) {
+              return el - 1;
+            });
+            return true;
+          }
+        }
+      }
+    },
+
+    checkForRight: function() {
+    var currentPiece = this.currentPiece;
+      var grid = this.grid;
+      for (var i = 0; i < grid.length; i++) {
+        for (var j = 0; j < currentPiece.length; j++) {
+          if(currentPiece[j] + 1 === grid[i]) {
+            this.currentPiece = this.currentPiece.map(function(el) {
+              return el + 1;
+            });
+            return true;
+          }
+        }
+      }
+    },
 
   checkForBottom:function() {
     var currentPiece = this.currentPiece;
