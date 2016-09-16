@@ -40,7 +40,7 @@ var rotationLogic = {
     model.rotateCounter++;
 
     if (model.rotateCounter > 3) {
-      model.rotateCounter -= 3;
+      model.rotateCounter -= 4;
     }
   },
 
