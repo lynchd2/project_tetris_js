@@ -15,13 +15,13 @@ function hashSample( obj ) {
 var colors = ['#ff0000', '#00ff00', '#0000ff', '#3b5998', '593001'];
 var pieces = {
               
-              "rightL": [4, 5, 6, 16],
-              "leftL": [4, 14 ,5, 6], 
-              "column": [4, 5, 6, 7],
-              "leftS": [4, 5, 15, 16],
-              "arrow": [14, 5, 15, 16],
-              "rightS": [14, 5, 15, 6],
-              "square": [4, 14, 5, 15]
+              // "rightL": [4, 5, 6, 16],
+              // "leftL": [4, 14 ,5, 6], 
+              "column": [4, 5, 6, 7, 8],
+              // "leftS": [4, 5, 15, 16],
+              // "arrow": [14, 5, 15, 16],
+              // "rightS": [14, 5, 15, 6],
+              // "square": [4, 14, 5, 15]
              };
 
 var model = {
@@ -77,20 +77,32 @@ var model = {
   },
 
   checkForBoundary: function() {
-  
+    
+    //var piece = this.currentPiece.slice()
+    var piece = [10,20,30,29]
+    var leftest = 0;
+    var rightest = 0;
+
+    for(var i = 0; i <= piece.length; i++) {
+      if (String(piece[0])[String(piece[0]).length - 1] <= String(piece[i])[String(piece[i]).length - 1]) {
+        rightest = i - 1
+      }
+      else {
+        leftest = 0;
+      }
+    }
     //right boundary
+
+    //var endIndex = newPiece.length - 1;
     
-    var endIndex = this.currentPiece.length - 1;
-    
-    if (this.currentPiece[endIndex] % 10 === 1) {
-    
+    if (this.currentPiece[rightest] % 10 === 1) {
+      console.log("right")
       this.currentPiece = this.currentPiece.map(function(el) {
         return el - 1;
-
       });
     }
     // left boundary
-    if (this.currentPiece[0] % 10 === 0) {
+    if (this.currentPiece[leftest] % 10 === 0) {
       this.currentPiece = this.currentPiece.map(function(el) {
         return el + 1;
       });
@@ -169,26 +181,26 @@ var model = {
 
 
   clearLines: function() {
-    this.grid = this.grid.sort();
     var counter = 0;
-    var id = 0;
+    var id = 1;
 
-    for (var i = 1; i < this.grid.length; i++) {
-      //if there are ten matching blocks in one row
-      if (counter === 9) {
-        this.grid.splice( i- 9, 10);
-        for(var j = 0; j < i - 9; j ++) {
-          this.grid[j] += 10;
-          this.score++;
-        };
-      }
-      // compares each element to the element next to each other
-      if ((this.grid[id] + 1) === this.grid[i]) {
+    for (var i = 0; i < this.grid.length; i++) {
+      if ((this.grid[id] - this.grid[i]) === 1) {
         counter++;
       } else {
         counter = 1;
       }
       id++;
+      //if(grid[i + 9] - grid[i] === 9) {
+      if (counter === 9) {
+        this.grid.splice(i - 8, 10);
+        for(var j = 0; j < i - 9; j ++) {
+          this.grid[j] += 10;
+        };
+        this.score++;
+      }
+      //}
+      // compares each element to the element next to each other
     }
   },
 

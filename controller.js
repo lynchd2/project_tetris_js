@@ -34,6 +34,7 @@ var controller = {
     var counter = 0;
     thatController = this;
     setInterval(function() {
+      model.grid.sort();
       if(counter % 1 === 0) {
         thatController.playerInput();
       }
@@ -41,9 +42,8 @@ var controller = {
         model.fallPiece();
       } 
       //logic, validations
-      
-      
       model.checkForBoundary();
+      
       model.clearLines();
       //rerender
       thatController.reRender();
